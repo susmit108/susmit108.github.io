@@ -1,0 +1,122 @@
+.post-content {
+  color: #263445;
+  font-size: 1.04rem;
+  line-height: 1.78;
+}
+
+.post-title {
+  color: #10243a;
+  font-size: clamp(2rem, 5vw, 3.15rem);
+  font-weight: 750;
+  letter-spacing: -0.045em;
+  line-height: 1.12;
+  max-width: 20ch;
+}
+
+.post-content h2 {
+  border-bottom: 1px solid #e4eaf1;
+  color: #10243a;
+  font-size: clamp(1.55rem, 3vw, 2rem);
+  letter-spacing: -0.025em;
+  margin-top: 3.25rem;
+  padding-bottom: 0.55rem;
+}
+
+.post-content h3 {
+  color: #173a5e;
+  margin-top: 2rem;
+}
+
+.post-content a {
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+}
+
+.report-stats {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 1.5rem 0 2.5rem;
+}
+
+.report-stat {
+  background: linear-gradient(145deg, #f5f9ff, #edf4fb);
+  border: 1px solid #dce8f4;
+  border-radius: 14px;
+  padding: 1.15rem 1.25rem;
+}
+
+.report-stat strong {
+  color: #0759a5;
+  display: block;
+  font-size: clamp(1.65rem, 4vw, 2.2rem);
+  letter-spacing: -0.04em;
+  line-height: 1.15;
+}
+
+.report-stat span {
+  color: #173a5e;
+  display: block;
+  font-size: 0.92rem;
+  font-weight: 700;
+  margin-top: 0.45rem;
+}
+
+.report-stat p {
+  color: #526477;
+  font-size: 0.88rem;
+  line-height: 1.55;
+  margin: 0.35rem 0 0;
+}
+
+.post-content table {
+  border: 1px solid #dce5ef;
+  border-collapse: separate;
+  border-radius: 10px;
+  border-spacing: 0;
+  display: table;
+  overflow: hidden;
+  width: 100%;
+}
+
+.post-content th {
+  background: #f0f5fa;
+  color: #173a5e;
+}
+
+.post-content th,
+.post-content td {
+  border-bottom: 1px solid #e4eaf1;
+  padding: 0.7rem 0.85rem;
+}
+
+.post-content tr:last-child td {
+  border-bottom: 0;
+}
+
+.post-content blockquote {
+  background: #f5f9ff;
+  border-left: 4px solid #3984c6;
+  border-radius: 0 8px 8px 0;
+  color: #354b62;
+  padding: 0.8rem 1.1rem;
+}
+
+.post-content mjx-container[display="true"] {
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.35rem 0;
+}
+
+@media (max-width: 640px) {
+  .report-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .post-content table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+}

@@ -21,9 +21,23 @@ Over the summer I built a **fully self-supervised, physics-informed foundation-m
 
 Headline results on simulated data (single run, validation split):
 
-- **Lens-class classification (Axion / CDM / No Substructure):** 97.3% accuracy with a frozen encoder plus MLP adapter, versus 70.9% for a fully supervised ResNet-152 trained end-to-end.
-- **Einstein-radius regression:** $$R^2 = 0.63$$ (standardized units) from the same frozen representation.
-- **Ablation:** pretraining with the physics constraints alone reached 97.85% classification accuracy and $$R^2 = 0.67$$. This is surprising, and I discuss it carefully below, because it does *not* yet prove that the physics is doing the work.
+<div class="report-stats">
+  <div class="report-stat">
+    <strong>97.3%</strong>
+    <span>Lens classification</span>
+    <p>Frozen encoder + adapter, compared with 70.9% for the supervised ResNet-152.</p>
+  </div>
+  <div class="report-stat">
+    <strong>0.63</strong>
+    <span>Einstein-radius R²</span>
+    <p>Regression from the same frozen representation, in standardized units.</p>
+  </div>
+  <div class="report-stat">
+    <strong>97.85%</strong>
+    <span>Physics-only ablation</span>
+    <p>A surprising result that needs controls before attributing performance to physics.</p>
+  </div>
+</div>
 
 ---
 
