@@ -24,9 +24,9 @@
   <text class="label" x="94" y="229">Gravitational</text>
   <text class="label" x="94" y="249">Lensing Image</text>
 
-  <path class="flow" d="M179 80H248"/>
   <rect x="197.5" y="23.5" width="436" height="156" fill="#ffe574" stroke="#b89900" stroke-width="1.5"/>
   <text class="heading" x="415" y="18">Encoder</text>
+  <path class="flow" d="M179 80H248"/>
   <rect x="248.5" y="37.5" width="169" height="85" rx="2" fill="#f7d8d5" stroke="#b54a4a" stroke-width="1.5"/>
   <text class="label" x="333" y="78">Multi Head Self Attention</text>
   <rect x="495.5" y="37.5" width="57" height="85" rx="2" fill="#f7d8d5" stroke="#b54a4a" stroke-width="1.5"/>
@@ -34,6 +34,7 @@
   <text class="label" x="524" y="92">Norm</text>
   <rect x="569.5" y="37.5" width="57" height="85" rx="2" fill="#f7d8d5" stroke="#b54a4a" stroke-width="1.5"/>
   <text class="label" x="598" y="83">MLP</text>
+  <path class="flow" d="M553 80H569"/>
   <path class="branch" d="M206 80V150H451V80"/>
   <path class="flow" d="M417 80H450"/>
   <circle cx="460" cy="80" r="9" fill="#fff1a8" stroke="#17212b" stroke-width="1.5"/>
