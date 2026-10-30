@@ -195,7 +195,6 @@ The key deliverables as part of this project, can be found in the repository:
 - Evaluation scripts and result tables
 
 PR: 
-
 Repository: 
 ---
 
