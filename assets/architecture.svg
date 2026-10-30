@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1034 403" role="img" aria-labelledby="title description">
+  <title id="title">Physics-constrained lensing model architecture</title>
+  <desc id="description">A gravitational-lensing image passes through patch and positional embedding into a three-layer transformer encoder. Four decoder heads predict convergence, potential, reconstructed raw image, and reconstructed preprocessed image.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto" markerUnits="strokeWidth">
+      <path d="M0 0 10 4 0 8Z" fill="#17212b"/>
+    </marker>
+    <style>
+      text { fill: #17212b; font-family: Arial, Helvetica, sans-serif; text-anchor: middle; }
+      .label { font-size: 15px; }
+      .heading { font-size: 16px; font-weight: 700; }
+      .flow { fill: none; stroke: #17212b; stroke-width: 1.8; marker-end: url(#arrow); }
+      .branch { fill: none; stroke: #17212b; stroke-width: 1.6; }
+    </style>
+  </defs>
+
+  <rect x="9.5" y="37.5" width="169" height="85" rx="2" fill="#c6d5e0" stroke="#286087" stroke-width="1.5"/>
+  <text class="label" x="94" y="68">Patch Embedding</text>
+  <text class="label" x="94" y="88">+</text>
+  <text class="label" x="94" y="108">Positional Embedding</text>
+
+  <path class="flow" d="M94 192V124"/>
+  <rect x="45.5" y="192.5" width="97" height="86" rx="2" fill="#b9e8e8" stroke="#258c91" stroke-width="1.5"/>
+  <text class="label" x="94" y="229">Gravitational</text>
+  <text class="label" x="94" y="249">Lensing Image</text>
+
+  <path class="flow" d="M179 80H248"/>
+  <rect x="197.5" y="23.5" width="436" height="156" fill="#ffe574" stroke="#b89900" stroke-width="1.5"/>
+  <text class="heading" x="415" y="18">Encoder</text>
+  <rect x="248.5" y="37.5" width="169" height="85" rx="2" fill="#f7d8d5" stroke="#b54a4a" stroke-width="1.5"/>
+  <text class="label" x="333" y="78">Multi Head Self Attention</text>
+  <rect x="495.5" y="37.5" width="57" height="85" rx="2" fill="#f7d8d5" stroke="#b54a4a" stroke-width="1.5"/>
+  <text class="label" x="524" y="72">Layer</text>
+  <text class="label" x="524" y="92">Norm</text>
+  <rect x="569.5" y="37.5" width="57" height="85" rx="2" fill="#f7d8d5" stroke="#b54a4a" stroke-width="1.5"/>
+  <text class="label" x="598" y="83">MLP</text>
+  <path class="branch" d="M206 80V150H451V80"/>
+  <path class="flow" d="M417 80H450"/>
+  <circle cx="460" cy="80" r="9" fill="#fff1a8" stroke="#17212b" stroke-width="1.5"/>
+  <path class="branch" d="M455 80h10M460 75v10"/>
+  <path class="flow" d="M469 80H495"/>
+  <text class="label" x="415" y="169">3x Transformer Layers Stacked</text>
+
+  <path class="flow" d="M627 101H712"/>
+  <rect x="712.5" y="44.5" width="113" height="113" rx="2" fill="#b7deed" stroke="#26739a" stroke-width="1.5"/>
+  <text class="label" x="769" y="105">Feature Map</text>
+
+  <text class="heading" x="504" y="288">Decoder</text>
+  <path class="branch" d="M769 158V189H656M769 189H979"/>
+  <path class="flow" d="M656 189V219"/>
+  <path class="flow" d="M767 189V219"/>
+  <path class="flow" d="M881 189V219"/>
+  <path class="flow" d="M979 189V219"/>
+  <path d="M614 205H578V347H614" fill="none" stroke="#17212b" stroke-width="3"/>
+
+  <path d="M636 220H678L700 277H614Z" fill="#f4c99e" stroke="#a56b36" stroke-width="1.5"/>
+  <path d="M749 220H791L813 277H727Z" fill="#f4c99e" stroke="#a56b36" stroke-width="1.5"/>
+  <path d="M859 220H901L923 277H837Z" fill="#f4c99e" stroke="#a56b36" stroke-width="1.5"/>
+  <path d="M958 220H1000L1022 277H936Z" fill="#f4c99e" stroke="#a56b36" stroke-width="1.5"/>
+  <text class="label" x="657" y="244">Deconv</text>
+  <text class="label" x="657" y="262">Decoder</text>
+  <text class="label" x="770" y="244">Deconv</text>
+  <text class="label" x="770" y="262">Decoder</text>
+  <text class="label" x="880" y="244">Deconv</text>
+  <text class="label" x="880" y="262">Decoder</text>
+  <text class="label" x="979" y="244">Deconv</text>
+  <text class="label" x="979" y="262">Decoder</text>
+
+  <path class="flow" d="M657 278V304"/>
+  <path class="flow" d="M770 278V304"/>
+  <path class="flow" d="M880 278V304"/>
+  <path class="flow" d="M979 278V304"/>
+  <rect x="614.5" y="305.5" width="85" height="85" fill="#70f126" stroke="#399919" stroke-width="1.5"/>
+  <rect x="726.5" y="305.5" width="85" height="85" fill="#76ce42" stroke="#398b25" stroke-width="1.5"/>
+  <rect x="837.5" y="305.5" width="85" height="85" fill="#39d800" stroke="#2c9910" stroke-width="1.5"/>
+  <rect x="936.5" y="305.5" width="87" height="85" fill="#9cf575" stroke="#4b9d32" stroke-width="1.5"/>
+  <text class="label" x="657" y="335">Convergence</text>
+  <text class="label" x="657" y="354">Map</text>
+  <text class="label" x="657" y="374">κ</text>
+  <text class="label" x="769" y="335">Potential</text>
+  <text class="label" x="769" y="354">Map</text>
+  <text class="label" x="769" y="374">ψ</text>
+  <text class="label" x="880" y="335">Reconstructed</text>
+  <text class="label" x="880" y="354">Raw</text>
+  <text class="label" x="880" y="374">Image</text>
+  <text class="label" x="980" y="335">Reconstructed</text>
+  <text class="label" x="980" y="354">Preprocessed</text>
+  <text class="label" x="980" y="374">Image</text>
+</svg>
