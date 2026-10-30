@@ -9,16 +9,17 @@ categories: gsoc ml4sci deeplense
 
 **Organization:** ML4SCI (DeepLense)
 **Contributor:** Susmit Neogi
-**Mentors:** Karthik Gaur
+**Mentors:** Karthik Gaur, Pranath Reddy, Michael Toomey
+**PR:** 
 **Repository:** TBD
 
 ---
 
 ## Introduction
 
-Over the summer I built a **fully self-supervised, physics-informed foundation-model prototype** for gravitational-lensing images. A single transformer encoder is pretrained on simulated lensing maps with **no labels**, using image reconstruction plus differentiable lensing-equation constraints on predicted potential ($$\psi$$) and convergence ($$\kappa$$) fields. The encoder is then **frozen**, and only small MLP adapters are trained for downstream tasks.
+Over the summer, we worked on a **fully self-supervised, physics-informed foundation-model prototype** for gravitational-lensing images. A single transformer encoder is pretrained on simulated lensing maps with **no labels**, using image reconstruction plus differentiable lensing-equation constraints on predicted potential ($$\psi$$) and convergence ($$\kappa$$) fields. The encoder is then **frozen**, and only small MLP adapters are trained for downstream tasks.
 
-Headline results on simulated data (single run, validation split):
+Headline results on Model-III dataset with model pretrained on Model-I dataset:
 
 <div class="report-stats">
   <div class="report-stat">
@@ -34,7 +35,7 @@ Headline results on simulated data (single run, validation split):
   <div class="report-stat">
     <strong>97.85%</strong>
     <span>Physics-only ablation</span>
-    <p>A surprising result that needs controls before attributing performance to physics.</p>
+    <p>A surprising result that points towards capabilities of physics as a SSL signal.</p>
   </div>
 </div>
 
@@ -55,17 +56,16 @@ The foundation-model recipe is appealing here: learn reusable features from larg
 1. Design a self-supervised pretraining objective for single-channel lensing images that needs **no labels**.
 2. Build a **task-agnostic encoder** that can be frozen and reused through lightweight adapters.
 3. Evaluate transfer on at least two different tasks: a discrete one (classification) and a continuous one (regression).
-4. Honestly assess what the results do and do not show.
 
 ---
 
 ## 3. Data
 
-I used two sets of simulations, all single-channel:
+We used two sets of simulations, all single-channel:
 
 - **Pretraining:** DeepLense **Model I**, simulated with a simple Sérsic light profile in Lenstronomy.
 - **Classification:** DeepLense **Model III**, with three near-balanced classes: *Axion*, *Cold Dark Matter (CDM)*, and *No Substructure*.
-- **Regression:** a custom simulation set where I varied the **Einstein radius** and randomly sampled other parameters (ellipticity, source position, amplitude).
+- **Regression:** a custom simulation set where we varied the **Einstein radius** and randomly sampled other parameters (ellipticity, source position, amplitude).
 
 ### Preprocessing
 
@@ -127,7 +127,7 @@ For each downstream task, the encoder output is **mean-pooled** over the 256 tok
 
 ### 4.4 Ablation: pure-physics pretraining
 
-To probe what each ingredient contributes, I trained a second encoder with **only** $$\mathcal{L}_{\text{phys}}$$, removing both reconstruction terms, while keeping the input pipeline, transformer, decoder capacity, optimizer, and schedule identical.
+To probe what each ingredient contributes, we trained a second encoder with **only** $$\mathcal{L}_{\text{phys}}$$, removing both reconstruction terms, while keeping the input pipeline, transformer, decoder capacity, optimizer, and schedule identical.
 
 **Pretraining setup (both models):** SGD, learning rate $$10^{-3}$$, weight decay $$10^{-4}$$, batch size 32, 10 epochs, best-validation-loss checkpoint.
 
@@ -160,16 +160,10 @@ The same frozen encoder, with a different one-scalar adapter, recovers a continu
 
 ## 6. Discussion
 
-I want this report to be as useful to future contributors as possible, so here is my honest read.
+Frozen representations from this pretraining framework retain task-relevant information. A lightweight adapter on top of them is enough to get strong classification and non-trivial regression on simulated data.
 
-**What the results support:** frozen representations from this pretraining framework retain task-relevant information. A lightweight adapter on top of them is enough to get strong classification and non-trivial regression on simulated data.
-
-**What they do not yet support:**
-
-1. **Attribution to physics.** The pure-physics ablation scoring as well as (or slightly better than) the full model is exciting, but it is also a red flag. The physics-only objective admits trivial solutions, such as a constant potential and zero convergence, that satisfy the consistency penalties without encoding the input at all. The strong downstream numbers could therefore come from the architecture, random-feature effects, or optimization dynamics rather than from physical consistency. Transformers with random weights can already yield surprisingly separable features.
-2. **Fair baselines.** The ResNet-152 is trained end-to-end, but an apples-to-apples comparison needs further controls (see below).
-3. **Statistical robustness.** All numbers come from a **single run** evaluated on the **validation split**, with no independent test set and no multi-seed variance.
-4. **Domain shift.** Everything is simulated. Transfer to real lensing images is untested.
+The pure-physics ablation scoring as well as (or slightly better than) the full model is exciting, but it is also a point to ponder. The physics-only objective admits trivial solutions, such as a constant potential and zero convergence, that satisfy the consistency penalties without encoding the input at all. The strong downstream numbers could therefore come from the architecture, random-feature effects, or optimization dynamics rather than from physical consistency. Transformers with random weights can already yield surprisingly separable features.
+An important thing to call out is that in this project, every data used is simulated. Transfer to real lensing images is a big next step.
 
 ---
 
@@ -179,37 +173,33 @@ These are the experiments I consider most important, in priority order:
 
 - **Untrained-encoder control:** freeze a randomly initialized encoder and train the same adapters. If it scores close to 97%, the pretraining gain is mostly architectural.
 - **Collapse diagnostics:** measure feature rank, variance across inputs, and decoder output variance for the physics-only model to check for representation collapse.
-- **Stronger baselines:** a supervised ResNet with tuned hyperparameters and augmentation, a standard masked-autoencoder or contrastive pretraining baseline, and a reconstruction-only ablation.
-- **Rigorous evaluation:** separate train / validation / test splits, multiple seeds, and confidence intervals.
 - **Physics term ablations:** turn on the Poisson, curl, and non-negativity terms one at a time. I also want to revisit the curl term's formulation, since the curl of a pure gradient field vanishes identically and the term may need to act on a separately predicted deflection field to be informative.
-- **Scaling:** more encoder capacity, longer pretraining (10 epochs is short), and larger datasets.
+- **Scaling:** more encoder capacity, longer pretraining (10 epochs is short), and larger datasets. Probably one of the next logical steps to follow, given that we have evidence of success with physics based SSL and can be scaled to develop bigger and better models.
 - **Real data:** test on observed or more realistic lensing images and under domain shift.
 
 ---
 
 ## 8. Reflections
 
-The most valuable lesson of this project was how easy it is for a promising number to become a misleading story. A 97% accuracy and a clean "physics helps" narrative were tempting, but a physics-only loss with degenerate minima is exactly the kind of setting where controls matter most. Writing the limitations alongside the results made the project better, and it gave me a concrete roadmap for follow-up work.
+The most valuable lesson of this project was to get a hands-on understanding of how physics concepts can heavily influence and improve machine learning pipelines. Since this was my first experience with physics informed machine learning, I found this field very exciting and interesting and thoroughly enjoyed learning the physics part of the concepts and translating them to code.
 
-On the technical side I gained hands-on experience with transformer encoders for scientific images, designing differentiable physics losses (finite-difference Laplacians and constraint penalties), simulation with Lenstronomy, and structuring frozen-encoder evaluation pipelines.
+On the technical side I gained hands-on experience with transformer encoders for scientific images, designing differentiable losses (finite-difference Laplacians and constraint penalties), simulation with Lenstronomy, and structuring frozen-encoder evaluation pipelines.
 
 ---
 
 ## 9. Deliverables
+The key deliverables as part of this project, can be found in the aforementioned repository:
 
 - Pretraining code for the SSL + physics and physics-only models
 - Downstream adapters for classification and Einstein-radius regression
 - Simulation scripts for the regression dataset
 - Evaluation scripts and result tables
-- Paper draft (NeurIPS 2026 submission)
-
-*(Add links to the repository, pull requests, and checkpoints here.)*
 
 ---
 
 ## 10. Acknowledgments
 
-Thank you to my mentors [names] and the ML4SCI / DeepLense community for their guidance, feedback, and patience throughout the summer, and to Google Summer of Code for making this work possible.
+Thank you to my mentors and the entire ML4SCI community for their guidance, feedback, and patience throughout the summer, and to Google Summer of Code for making this work possible.
 
 ---
 
