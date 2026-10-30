@@ -8,14 +8,13 @@ categories: gsoc ml4sci deeplense
 **Google Summer of Code 2026: Final Report**
 
 **Organization:** ML4SCI (DeepLense)
-**Contributor:** [Your Name]
-**Mentors:** [Mentor Names]
-**Repository:** [Link to GitHub repo]
-**Paper draft:** Submitted to NeurIPS 2026
+**Contributor:** Susmit Neogi
+**Mentors:** Karthik Gaur
+**Repository:** TBD
 
 ---
 
-## TL;DR
+## Introduction
 
 Over the summer I built a **fully self-supervised, physics-informed foundation-model prototype** for gravitational-lensing images. A single transformer encoder is pretrained on simulated lensing maps with **no labels**, using image reconstruction plus differentiable lensing-equation constraints on predicted potential ($$\psi$$) and convergence ($$\kappa$$) fields. The encoder is then **frozen**, and only small MLP adapters are trained for downstream tasks.
 
@@ -74,7 +73,7 @@ Images are bilinearly resized to **64 × 64** to keep the transformer token coun
 
 $$z = \left(\log \frac{I_{\max}}{\max(I, \epsilon)}\right)^2$$
 
-Finite-difference filters followed by $$|\tanh(\cdot)|$$ produce an edge-like **preprocessed image**. In parallel, the raw image goes through a log transform and per-sample z-normalization to form a second reconstruction target that preserves the physical intensity scale.
+Finite-difference filters followed by $$\tanh(\cdot)$$ produce an edge-like **preprocessed image**. In parallel, the raw image goes through a log transform and per-sample z-normalization to form a second reconstruction target that preserves the physical intensity scale.
 
 Both targets are deterministic transformations of the input, so no annotation is needed.
 
@@ -159,7 +158,7 @@ The same frozen encoder, with a different one-scalar adapter, recovers a continu
 
 ---
 
-## 6. What These Results Do and Do Not Show
+## 6. Discussion
 
 I want this report to be as useful to future contributors as possible, so here is my honest read.
 
