@@ -10,8 +10,7 @@ categories: gsoc ml4sci deeplense
 **Organization:** ML4SCI (DeepLense)
 **Contributor:** Susmit Neogi
 **Mentors:** Karthik Gaur, Pranath Reddy, Michael Toomey
-**PR:** 
-**Repository:** TBD
+
 
 ---
 
@@ -188,13 +187,16 @@ On the technical side I gained hands-on experience with transformer encoders for
 ---
 
 ## 9. Deliverables
-The key deliverables as part of this project, can be found in the aforementioned repository:
+The key deliverables as part of this project, can be found in the repository:
 
 - Pretraining code for the SSL + physics and physics-only models
 - Downstream adapters for classification and Einstein-radius regression
 - Simulation scripts for the regression dataset
 - Evaluation scripts and result tables
 
+PR: 
+
+Repository: 
 ---
 
 ## 10. Acknowledgments
