@@ -82,8 +82,10 @@ Both targets are deterministic transformations of the input, so no annotation is
 
 ## 4. Method
 
-![Architecture diagram](/assets/architecture.png)
-*Figure 1: A shared transformer encoder maps a 64 × 64 lensing image to 256 tokens. Four decoders predict the potential, convergence, preprocessed image, and raw image during pretraining. (Replace with Figure 1 from the paper.)*
+<figure class="report-figure">
+  <img src="{{ '/assets/architecture.png' | relative_url }}" alt="Architecture diagram showing a gravitational-lensing image passing through patch and positional embedding into a three-layer transformer encoder, then four decoders that predict convergence, potential, reconstructed raw image, and reconstructed preprocessed image." loading="lazy">
+  <figcaption><strong>Figure 1.</strong> The shared transformer encoder maps a 64 × 64 lensing image to 256 tokens. Four decoder heads predict the potential, convergence, preprocessed image, and raw image during pretraining.</figcaption>
+</figure>
 
 ### 4.1 Architecture
 

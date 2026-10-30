@@ -32,6 +32,28 @@
   text-underline-offset: 0.18em;
 }
 
+.report-figure {
+  margin: 2rem auto 2.5rem;
+  max-width: 760px;
+}
+
+.report-figure img {
+  background: #fff;
+  border: 1px solid #e1e8f0;
+  border-radius: 12px;
+  display: block;
+  height: auto;
+  padding: 0.75rem;
+  width: 100%;
+}
+
+.report-figure figcaption {
+  color: #607184;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin: 0.75rem 0.25rem 0;
+}
+
 .report-stats {
   display: grid;
   gap: 1rem;
