@@ -19,7 +19,7 @@ categories: gsoc ml4sci deeplense
 
 **Repository:** [DeepLense](https://github.com/ML4SCI/DeepLense) [TBC]
 
-**PR:** https://github.com/ML4SCI/DeepLense/pull/247
+**PR:** [ML4SCI/DeepLense#247](https://github.com/ML4SCI/DeepLense/pull/247)
 
 ---
 
