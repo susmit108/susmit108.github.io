@@ -5,12 +5,20 @@ date: 2026-10-29
 categories: gsoc ml4sci deeplense
 ---
 
-**Google Summer of Code 2026: Final Report**
+**Google Summer of Code 2026: Final Blog**
 
 **Organization:** ML4SCI (DeepLense)
+
 **Contributor:** Susmit Neogi
+
 **Mentors:** Karthik Gaur, Pranath Reddy, Michael Toomey
 
+---
+
+## Code Details
+
+**Repository:** [DeepLense](https://github.com/ML4SCI/DeepLense) [TBC]
+**PR:** https://github.com/ML4SCI/DeepLense/pull/247
 
 ---
 
