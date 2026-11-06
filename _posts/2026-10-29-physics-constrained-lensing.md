@@ -17,7 +17,7 @@ categories: gsoc ml4sci deeplense
 
 ## Code Details
 
-**Repository:** [DeepLense](https://github.com/ML4SCI/DeepLense) [TBC]
+**Repository:** [DeepLense](https://github.com/ML4SCI/DeepLense/tree/main/DeepLense_Physics_Informed_SSL_Susmit_Neogi)
 
 **PR:** [ML4SCI/DeepLense#247](https://github.com/ML4SCI/DeepLense/pull/247)
 
